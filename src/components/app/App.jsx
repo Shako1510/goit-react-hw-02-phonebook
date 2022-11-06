@@ -1,6 +1,6 @@
-import { Component } from "react";
+import { React, Component } from "react";
 import { nanoid } from 'nanoid';
-import Form from "../form/Form";
+import ContactForm from "../form/Form";
 import Contacts from "../contacts/Contacts";
 import Filter from "../filter/Filter";
 import { DivBox, TitleBox, SecondaryTitleBox } from "./AppStyled";
@@ -13,32 +13,13 @@ export class App extends Component {
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },],
-    name: '',
+
     filter: '',
-    number: ''
-  }
-
-
-  // formSubmitHandler = data => {
-  //   console.log(data);
-  // }
-
-
-  reset = () => {
-    this.setState({ name: '', number: '' })
-  };
-
-  handleInputChange = (e) => {
-    this.setState(
-      { [e.currentTarget.name]: e.currentTarget.value }
-    );
 
   }
 
+  addContact = () => {
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.chekingContacts();
     this.setState(prevState => {
       const newContact = {
         id: nanoid(),
@@ -47,10 +28,11 @@ export class App extends Component {
       };
       return {
         contacts: [newContact, ...prevState.contacts],
-        name: '',
-        number: '',
       };
     });
+
+
+
   };
 
 
@@ -77,9 +59,8 @@ export class App extends Component {
 
     if (findContact) {
       alert(`${this.state.name} is already in contacts`);
+      return;
     }
-    return
-
   };
 
   render() {
@@ -90,8 +71,8 @@ export class App extends Component {
 
         <TitleBox>Phonebook</TitleBox>
 
-        <Form
-          onSubmit={this.handleSubmit}
+        <ContactForm
+          onSubmit={this.addContact}
           onChange={this.handleInputChange}
           nameValue={this.state.name}
           numberValue={this.state.number}
