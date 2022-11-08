@@ -2,6 +2,8 @@ import { LabelBox, InputBox } from "./FilterStyled";
 import PropTypes from 'prop-types';
 
 const Filter = ({ filterValue, onChange }) => {
+
+
     return (
         <LabelBox>
             Find contacts by name

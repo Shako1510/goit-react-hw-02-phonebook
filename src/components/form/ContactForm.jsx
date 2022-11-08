@@ -1,11 +1,11 @@
-import { nanoid } from 'nanoid';
+import { React, Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormBox, ButtonAdd, InputBox, LabelBox } from './FormStyled';
-import { React, Component } from 'react';
 
 
-const nameInputId = nanoid(5);
-const numberInputId = nanoid(8)
+
+// const nameInputId = nanoid(5);
+// const numberInputId = nanoid(8)
 
 
 class ContactForm extends Component {
@@ -15,27 +15,32 @@ class ContactForm extends Component {
         number: '',
     };
 
-    reset = () => {
-        this.setState({ name: '', number: '' })
-    };
 
-    handleInputChange = (e) => {
+    handleInputChange = e => {
         const { name, value } = e.currentTarget;
         this.setState(
             { [name]: value }
         );
+    };
 
-    }
     handleSubmit = event => {
         event.preventDefault();
+
+
         this.props.onSubmit(this.state);
-        this.setState({ name: '', number: '' });
+
+        this.reset();
     };
+
+    reset = () => {
+        this.setState({ name: '', number: '' })
+    };
+
     render() {
         return (
             <FormBox>
                 <form onSubmit={this.handleSubmit}>
-                    <LabelBox>Name
+                    <LabelBox >Name
                         <InputBox
                             type="text"
                             name="name"
@@ -44,7 +49,7 @@ class ContactForm extends Component {
                             required
                             onChange={this.handleInputChange}
                             value={this.state.name}
-                            id={nameInputId}
+
                         />
                     </LabelBox>
 
@@ -57,7 +62,8 @@ class ContactForm extends Component {
                             required
                             onChange={this.handleInputChange}
                             value={this.state.number}
-                            id={numberInputId}
+
+
                         />
                     </LabelBox>
 
